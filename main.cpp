@@ -86,7 +86,7 @@ int main(){
     }
   }
   else{
-    std::cout<<"\nVacio, aniadiendo iniciales!\n";
+    std::cout<<"\nVacio, registrando aliens iniciales por defecto!\n";
     std::vector<Alien> aliens_iniciales_vector = {
       Alien("HeatBlast", 10, 12, 10, 12, 4, 2, 2),
       Alien("Grey Matter", 20, 2, 4, 1, 4, 1, 1),
