@@ -1,7 +1,7 @@
 #include "alien.h"
 #include "arbol.h"
 #include <vector>
-#include <queue>
+//#include <queue>
 #ifndef OMNITRIX_H
 #define OMNITRIX_H
 
@@ -33,11 +33,12 @@ public:
     tree.find(alien);
     tree.root->alien.sumarEleccion();
   }
-  
+
   void registrarEleccion(std::string nom){
     for(int i =0; i < aliens_unlocked.size();i++){
       if(aliens_unlocked[i].getNombre() == nom){
         aliens_unlocked[i].sumarEleccion();
+        aliens_unlocked[i].sumarUso();
       }
     }
   }
