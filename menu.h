@@ -479,8 +479,11 @@ private:
             seleccion_error = false;
             numero_intentos = 5;
             std::cout<<"Transformacion actual:\n\n";
-            mostrarAlien(i);
+            //dispositivo.registrarUso(a_d[i].getNombre());
+            dispositivo.registrarEleccion(a_d[i].getNombre());
             dispositivo.registrarEleccionSplay(a_d[i]);
+            mostrarAlien(i);
+
             //return continuarSiNo();
           }
         }
