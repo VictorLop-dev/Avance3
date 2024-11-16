@@ -63,19 +63,26 @@ El guardado se puede probar haciendo modificaciones al añadir aliens y/o elimin
 
 ### Hace un análisis de complejidad correcto y completo para todo el programa y sus componentes,
 
-#### Vector y Splay Tree de aliens
+#### Queue y Splay Tree de aliens
 
-función de selección guiada: 
+función de selección guiada (queue): Ya que están ordenados siempre será O(1) para obtener el siguiente alien ya que sólo estoy accediendo a la primera posición y eliminándola.
 
-funcion de selección libre: 
+funcion de selección libre (find SplayTree): Siempre es O(log(n)) ya que es una especie de búsqueda binaria.
 
-función de añadir alien: 
+función de añadir alien (insert SplayTree/ vector): También es O(log(n)) ya que técnicamente es como un find pero que añade al nuevo alien en la posición que debería estar y hasta atrás en el vector.
 
-#### ordenamiento de aliens
+función de eliminar alien (delete SplayTree / vector): Si sólo fuera un SplayTree entonces  sería O(log(n)) pero como también debe trabajar con el vector, aumenta a O(n) por el peor de los casos de 
+este último.
 
-selección guiada en base a un parámetro / balanceada: ...
+#### ordenamiento de aliens (20 ó menos)
+
+selección guiada en base a un parámetro / balanceada: 
 
 selección guiada en base a dos parámetros:
+
+#### ordenamiento de aliens (21 ó más)
+
+
 
 #### uso de árbol
 
