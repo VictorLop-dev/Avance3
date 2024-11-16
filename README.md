@@ -72,27 +72,29 @@ funcion de selección libre (find SplayTree): Siempre es O(log(n)) ya que es una
 función de añadir alien (insert SplayTree/ vector): También es O(log(n)) ya que técnicamente es como un find pero que añade al nuevo alien en la posición que debería estar y hasta atrás en el vector.
 
 función de eliminar alien (delete SplayTree / vector): Si sólo fuera un SplayTree entonces  sería O(log(n)) pero como también debe trabajar con el vector, aumenta a O(n) por el peor de los casos de 
-este último.
+este último ya que va comparando el nombre del alien guardado en cada posición del vector para saber si existe o no.
 
 #### ordenamiento de aliens (20 ó menos)
 
-selección guiada en base a un parámetro / balanceada: 
+selección guiada en base a un parámetro / balanceada: O(n^2) debido a que se usa el insertion sort
 
-selección guiada en base a dos parámetros:
+selección guiada en base a dos parámetros: También O(n^2) debido a que se usa el insertion sort, sólo que sobre un nuevo vector generado a partir de la suma de dos atributos
 
 #### ordenamiento de aliens (21 ó más)
 
+selección guiada en base a un parámetro / balanceada: Complejidad de O(n(log(n))) sea cual sea el caso
 
+selección guiada en base a dos parámetros: O(n(log(n))) también, sólo que se aplica en base a un nuevo vector generado a partir de la suma de dos atributos
 
 #### uso de árbol
 
-crear árbol de aliens: ...
+crear árbol de aliens: En cada ejecución del programa se crea un árbol de aliens en base a las conexiones registradas, 
 
-agregar alien (nodo) a árbol: ...
+agregar alien (nodo) a árbol: O(log(n))
 
-econtrar alien (nodo) en árbol : ...
+econtrar alien (nodo) en árbol : O(log(n)), es la base de otras operaciones como agregar o eliminar, por eso tienen una complejidad temporal bastante similar.
 
-eliminar alien (nodo) en árbol: ...
+eliminar alien (nodo) en árbol: O(log(n))
 
 ## SICT0303B: Implementa acciones científicas 
 
