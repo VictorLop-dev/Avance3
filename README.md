@@ -2,23 +2,19 @@
 Como dice el título, este proyecto se basa en el misterioso comportamiento interno que tiene el Omnitrix en la serie Ben 10,
 donde para usarse se sigue el siguiente comporamiento:
 
->Ejemplo 1: Augmentine "125" suspensión, (125/31,25 mg/5 ml)
+>Ejemplo 1: Selección guiada
 > 
->Paso 1: Introducir el peso del paciente. Por ejemplo: 8 kg.
->Paso 2: Introducir la posología deseada. Por ejemplo: 40 mg/kg/día.
->Paso 3: Introducir la presentación. Suspensión.
-> 
->Con estos datos se obtiene la dosis al día: 320 mg/día.
+>Paso 1: Introducir el criterio de selección, en caso de no ser válido se usará velocidad o resistencia por defecto (según sea modo de un criterio o dos)
+>Paso 2: Ver los aliens que van saliendo hasta que "la amaneza" haya sido derrotada.
 >
->Paso 4: Elegir el número de dosis al día: 3 dosis = cada 8 horas.
->Paso 5: Introducir los mg que contiene la unidad (en este caso el ml).
->            Si la concentración es de 125 mg/5 ml. Los mg/ml = 125/5 = 25 mg/ml.
->            Para resolver este cálculo tenemos a la derecha otra calculadora.
+>Ejemplo 2: Selección libre 
 >
->Obtenemos: 106,67 mg/dosis = 4,28 ml cada 8 horas.
+>Paso 1: Insertar el nombre del alien que quieres elegir (tienes intentos limitados que se reinician cuando eliges un alien no repetido y válido)
+>Paso 2: Continuar eligiendo aliens (no puedes elegir el mismo dos veces seguidas) hasta que se desee.
+>            
 
-Adicionalmente incluyo las funciones para registrar nuevo medicamentos y ver los medicamentos registrados 
-por orden alfabético o por cantidad  de gramaje 
+Adicionalmente incluyo funciones para registrar nuevos aliens, eliminarlos, ver un alien en base al nombre, ver la lista de aliens completa o ver la lista con atributos incluso. 
+El orden de los aliens en las "listas" es en el que se hayan añadido, nunca modifico dicho vector para que así se sepa siempre en qué orden se añadieron.
 
 ## SICT0302B: Toma decisiones 
 
