@@ -1,10 +1,11 @@
 # Simulador de selector de aliens basado en el omnitrix de la serie "Ben 10"
 Como dice el título, este proyecto se basa en el misterioso comportamiento interno que tiene el Omnitrix en la serie Ben 10,
-donde para usarse se sigue el siguiente comporamiento:
+donde para usarse se sigue el siguiente comportamiento:
 
->Ejemplo 1: Selección guiada
+>Ejemplo 1: Selección guiada 
 > 
->Paso 1: Introducir el criterio de selección, en caso de no ser válido se usará velocidad o resistencia por defecto (según sea modo de un criterio o dos)
+>Paso 1: Introducir el criterio de selección, puede ser fuerza, velocidad, resistencia, una combinación de estos o el total,
+>en caso de no ser válido se usará velocidad o resistencia por defecto (según sea modo de un criterio o dos).
 >Paso 2: Ver los aliens que van saliendo hasta que "la amaneza" haya sido derrotada.
 >
 >Ejemplo 2: Selección libre 
