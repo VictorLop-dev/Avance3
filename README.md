@@ -6,35 +6,34 @@ donde para usarse se sigue el siguiente comportamiento:
 > 
 >Paso 1: Introducir el criterio de selección, puede ser fuerza, velocidad, resistencia, una combinación de estos o el total,
 >en caso de no ser válido se usará velocidad o resistencia por defecto (según sea modo de un criterio o dos).
->Paso 2: Ver los aliens que van saliendo hasta que "la amaneza" haya sido derrotada.
->
+>Paso 2: Ver los aliens que van saliendo hasta que se desee.
 >Ejemplo 2: Selección libre 
 >
 >Paso 1: Insertar el nombre del alien que quieres elegir (tienes intentos limitados que se reinician cuando eliges un alien no repetido y válido)
->Paso 2: Continuar eligiendo aliens (no puedes elegir el mismo dos veces seguidas) hasta que se desee.
+>Paso 2: Continuar eligiendo aliens (no puedes elegir el mismo dos veces seguidas) hasta que se desee o se agote el número de intentos.
 >            
 
-Adicionalmente incluyo funciones para registrar nuevos aliens, eliminarlos, ver un alien en base al nombre, ver la lista de aliens completa o ver la lista con atributos incluso. 
+Adicionalmente incluyo funciones para registrar nuevos aliens, eliminarlos, ver un alien en base al nombre y sus estadísticas, ver la lista de aliens completa o ver la lista con atributos incluso. 
 El orden de los aliens en las "listas" es en el que se hayan añadido, nunca modifico dicho vector para que así se sepa siempre en qué orden se añadieron.
 
 ## SICT0302B: Toma decisiones 
 
 ### Selecciona y usa una estructura lineal adecuada al problema
 
-Uso un queue en la parte del modo de selección guiada para sacar los aliens en un orden descendente y no repetirlos, y para almacenar los aliens un simple vector.
+Uso un queue en la parte del modo de selección guiada ya que están ordenados para sacar los aliens en un orden descendente y no repetirlos; para almacenar los aliens uso un simple vector.
 Cada alien es un objeto que contiene como atributos de tipo entero: inteligencia, fuerza, velocidad, resistencia, total, batallas ganadas, veces usado y veces elegido;
 y el nombre que es un atributo de tipo cadena. Los cinco primeros atributos se usan para poder ordenar a los aliens según el criterio deseado en el modo de selección
-guiada, a su vez, total, batallas ganadas y veces elegido se usan para el orden en el splay tree.
+guiada; a su vez: total, batallas ganadas y veces elegido se usan para determinar el orden en el splay tree.
 
 
 ### Selecciona un algoritmo de ordenamiento adecuado al problema
 
 Para este problema utilice dos algoritmos de ordenamiento distintos, uno de tipo InsertionSort y otro de tipo MergeSort, específicamente si hay 20 aliens o menos se usará el 
-Insertion Sort y si hay más (en la serie original la versión del futuro de Ben 10 llegó a tener más de 10,000 aliens) se usará el MergeSort. La razón de esto es que cuando hay
-un número pequeño de elementos InsertionSort puede ser igual o incluso más eficiente que MergeSort en algunos casos, y MergeSort porque de los que vimos en clase es el más 
-eficiente ya que su complejidad temporal no depende de cómo estén ordenados los elementos.
-Las fuciones donde se pueden ver es en las funciones insertionSort (línea 26) y mergeSort (línea 151) en el archivo ordenamiento.h, he de mencionar también que mergeSort
-requiere de otras funciones para funcionar como mergeArray (línea 73) y mergeSplit (línea 125).
+Insertion Sort y si hay más (en la serie original la versión del futuro de Ben 10 llegó a tener más de 10,000 aliens) se usará el MergeSort. La razón de esto es que, cuando hay
+un número pequeño de elementos, InsertionSort puede ser igual o incluso más eficiente que MergeSort en algunos casos, y elegí MergeSort porque de los que vimos en clase es el más 
+eficiente ya que su complejidad temporal no depende de cómo estén ordenados los elementos (lo cual es bueno para el peor caso pero afecta un poco al mejor).
+InsertionSort (línea 26) y mergeSort (línea 151) están en el archivo ordenamiento.h, he de mencionar también que mergeSort requiere de otras funciones para funcionar como mergeArray 
+(línea 73) y mergeSplit (línea 125).
 
 ### Usa un árbol adecuado para resolver un problema
 
@@ -54,15 +53,15 @@ en arbol.h líneas 189 y 554 respectivamente).
 
 Honestamente, aún no he implementado casos de prueba, pero los que planeo son los siguientes:
 
-Añadir y eliminar aliens.
+Añadir y eliminar aliens y posteriormente mostrar la lista de aliens para ver si están todos los añadidos y si están en el orden que se fueron insertando.
 
 Probar los distintos ordenamientos haciendo ordenamiento con los 20 por defecto y luego con otro que añada yo.
 
-Y las distintas funciones que involucran al SplayTree, pudiendo verificar que todo esté en orden con la función printTree.
+Añadir alien, selección libre y eliminar ADN peligroso involucran al SplayTree, se puede hacer dichas operaciones y luego pedir la lista de aliens o usar el printTree.
 
-El guardado también sería importante de verificar, sobre todo en el splay tree.
+El guardado se puede probar haciendo modificaciones al añadir aliens y/o eliminarlos, cerrar el programa y luego volver a abrirlo y pedir ver la lista de aliens.
 
-### Hace un análisis de complejidad correcto y completo para todo el programa y sus compenetes,
+### Hace un análisis de complejidad correcto y completo para todo el programa y sus componentes,
 
 #### Vector y Splay Tree de aliens
 
@@ -72,29 +71,32 @@ funcion de selección libre:
 
 función de añadir alien: 
 
-#### ordenamiento de medicinas
+#### ordenamiento de aliens
 
-ordenamiento con merge sort: ...
+selección guiada en base a un parámetro / balanceada: ...
+
+selección guiada en base a dos parámetros:
 
 #### uso de árbol
 
-crear árbol de gramaje: ...
+crear árbol de aliens: ...
 
-agregar nodo a árbol gramaje: ...
+agregar alien (nodo) a árbol: ...
 
-econtrar nodo en árbol gramaje: ...
+econtrar alien (nodo) en árbol : ...
+
+eliminar alien (nodo) en árbol: ...
 
 ## SICT0303B: Implementa acciones científicas 
 
 ### Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
 
-El programa tiene la opción de buscar medicinas en base a 5 criterios distintos, o en base al nombre.
+El programa tiene la opción de mostrar aliens en base a 5 criterios compuestos o a la elección de 2 de los 4, o en base al nombre.
 El programa permite obtener información acerca de todos los aliens o el que se especifique.
 
 ### Implementa mecanismos de lectura de archivos correctos y útiles dentro de un programa. Usar de manera
 
-Los aliens así como su información, se encuentran almacenados en un archivo llamado "prueba.txt", tanto las características como las conexiones en el splay tree.
-
+Los aliens así como su información, se encuentran almacenados en un archivo llamado "prueba.txt", también los nodos y sus conexiones.
 ### Implementa mecanismos de escritura de archivos correctos y útiles dentro de un programa. Usar de manera
 
 Los aliens se guardan al final de cada ejecución del programa para no tener que registrarlos todos cada vez que se vayan a usar.
