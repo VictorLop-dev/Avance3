@@ -6,46 +6,57 @@
 #include "alien.h"
 #include "guardador.h"
 #include <unordered_map>
-void asignarConexiones(std::vector<Node>& nodos_desconectados, const std::vector<std::vector<std::string>>& conexiones) {
-    // Crear el mapa de nombre a puntero de nodo para búsquedas rápidas
+void asignarConexiones(std::vector<Node>& nodos_desconectados,
+  const std::vector<std::vector<std::string>>& conexiones) {
+    //Mapa de nombre a puntero con el nodo que contiene al alien.
     std::unordered_map<std::string, Node*> nombre_a_nodo;
     for (auto& nodo : nodos_desconectados) {
         nombre_a_nodo[nodo.alien.getNombre()] = &nodo;
     }
 
-    // Asignar parent, left y right usando el mapa para cada nodo en base a las conexiones
+    //Guardar padre, e hijos correspondientes.
     for (int i = 0; i < nodos_desconectados.size(); i++) {
         std::string nombre_actual = conexiones[i][0];
         std::string padre_nombre = conexiones[i][1];
         std::string izquierdo_nombre = conexiones[i][2];
         std::string derecho_nombre = conexiones[i][3];
 
-        // Buscar el nodo actual en el mapa
+        //Buscar el nodo actual en el mapa recién creado
         Node* nodo_actual = nombre_a_nodo[nombre_actual];
 
-        // Asignar el padre si existe en el mapa
+        //Asignar el padre si existe
         if (!padre_nombre.empty() && nombre_a_nodo.count(padre_nombre)) {
             nodo_actual->parent = nombre_a_nodo[padre_nombre];
         }
 
-        // Asignar el hijo izquierdo si existe en el mapa
+        //Asignar izquierdo si existe en el Hash
         if (!izquierdo_nombre.empty() && nombre_a_nodo.count(izquierdo_nombre)) {
             nodo_actual->left = nombre_a_nodo[izquierdo_nombre];
         }
 
-        // Asignar el hijo derecho si existe en el mapa
+        //Asignar el hijo derecho si existe en el Hash
         if (!derecho_nombre.empty() && nombre_a_nodo.count(derecho_nombre)) {
             nodo_actual->right = nombre_a_nodo[derecho_nombre];
         }
     }
 
-    // Asignar el primer nodo como raíz del árbol
+
 
 }
+
+std::unordered_map<std::string,Alien> crearHash(
+  const std::vector<Alien>& aliens_vect){
+  std::unordered_map<std::string,Alien> nuevo_hash;
+  for (auto alien: aliens_vect){
+    nuevo_hash[alien.getNombre()] = alien;
+  }
+  return nuevo_hash;
+}
 int main(){
+  std::unordered_map<std::string,Alien> alien_hash;
   SplayTree arbol;
   arbol.removeAll();
-  std::string nombre_archivo = "prueba.txt";
+  std::string nombre_archivo = "ADN.txt";
 
   std::vector<Alien> aliens_archivo_vector;
   std::vector<std::vector<std::string>> conexiones;
@@ -117,10 +128,11 @@ int main(){
       arbol.add(aliens_iniciales_vector[i]);
       aliens_archivo_vector.push_back(aliens_iniciales_vector[i]);
     }
+
   }
 
-
-  Omnitrix omnitrix(aliens_archivo_vector,arbol);
+  alien_hash = crearHash(aliens_archivo_vector);
+  Omnitrix omnitrix(aliens_archivo_vector,arbol,alien_hash);
   Menu menu (omnitrix,0);
   menu.menuPrincipal();
 
@@ -128,5 +140,5 @@ int main(){
   escribir(aliens_archivo_vector,arbol,nombre_archivo);
   std::cout<<"\nEscritura terminada\n";
 
-  std::cout<<"Prueba terminada!";
+  //std::cout<<"Prueba terminada!";
 }

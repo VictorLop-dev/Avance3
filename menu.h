@@ -5,6 +5,7 @@
 #include "omnitrix.h"
 #include "ordenamiento.h"
 #include <queue>
+#include <unordered_map>
 #ifndef MENU_H
 #define MENU_H
 Ordenamiento orden;
@@ -111,6 +112,23 @@ private:
   }
 
 
+  void mostrarAlien(std::string nom){
+    std::unordered_map <std::string, Alien>& aliens = dispositivo.getAliensHash();
+    //Afuera ya se tuvo que haber verificado si existia dicho alien o no.
+    //std::vector<Alien> a_d = dispositivo.getAliensUnlocked();
+    //a_d son los aliens desbloqueados
+    std::cout<<"Nombre: "<<aliens.at(nom).getNombre()<<"\n";
+    std::cout<<"Inteligencia: "<<aliens.at(nom).getInteligencia()<<"\n";
+    std::cout<<"Fuerza: "<<aliens.at(nom).getFuerza()<<"\n";
+    std::cout<<"Velocidad: "<<aliens.at(nom).getVelocidad()<<"\n";
+    std::cout<<"Resistencia: "<<aliens.at(nom).getResistencia()<<"\n";
+    std::cout<<"Puntos totales: "<<aliens.at(nom).getTotal()<<"\n";
+    std::cout<<"Veces usado: "<<aliens.at(nom).getVecesUsado()<<"\n";
+    std::cout<<"Veces elegido: "<<aliens.at(nom).getVecesElegido()<<"\n";
+    std::cout<<"Batallas ganadas: "<<aliens.at(nom).getBatallasGanadas()<<"\n";
+    std::cout<<"\n";
+  }
+
   void mostrarAlien(int indice){
     //Afuera ya se tuvo que haber verificado si existia dicho alien o no.
     std::vector<Alien> a_d = dispositivo.getAliensUnlocked();
@@ -185,6 +203,8 @@ private:
   }
 
   bool registrarAlien(){
+    std::unordered_map<std::string, Alien>& alien_hash =
+    dispositivo.getAliensHash();
     std::string nom;
     std::vector<Alien> a_d = dispositivo.getAliensUnlocked();
     int numero_aliens = a_d.size();
@@ -270,6 +290,7 @@ private:
               tenacidad));
               dispositivo.anadirSplay(Alien(nom,intelecto,poder,rapidez,
               tenacidad));
+              alien_hash.insert({nom,Alien(nom,intelecto,poder,rapidez,tenacidad)});
               std::cout<<"\nMuestra agregada exitosamente!\n\n";
               return continuarSiNo();
             }
@@ -295,6 +316,8 @@ private:
   bool eliminarADN(){
     std::vector<Alien> a_d = dispositivo.getAliensUnlocked();
     int numero_aliens = a_d.size();
+    std::unordered_map<std::string, Alien>& alien_hash =
+    dispositivo.getAliensHash();
 
     if (numero_aliens == 0){
       for (int i = 0; i<3;i++){
@@ -322,40 +345,42 @@ private:
           std::cout<<".";
         }
         std::cout<<"\n\n";
-        for (int i = 0; i < numero_aliens; i++){
-          if(name == a_d[i].getNombre()){
-
-            char eleccion = 'a';
-            while (eleccion != 'y' && eleccion != 'n'){
-            std::cout<<"Estas seguro de querer eliminar este alien?\n\n";
-            mostrarAlien(i);
-            std::cout<<"\n";
-            eleccion = input("Escribe 'y' o 'n': \n",eleccion);
-
-            if(eleccion == 'y'){
-              std::cout<<"Eliminando muestra de ADN";
-              for (int i = 0; i<3;i++){
-                delay(duracion_pausas);
-                std::cout<<".";
-              }
-              dispositivo.eliminarAlienSplay(a_d[i]);
-              dispositivo.borrarAlien(name);
+        if (alien_hash.count(name)>0){
 
 
-              std::cout<<"\n\n\nMuestra eliminada exitosamente!\n";
-              return continuarSiNo();
+          char eleccion = 'a';
+          while (eleccion != 'y' && eleccion != 'n'){
+          std::cout<<"Estas seguro de querer eliminar este alien?\n\n";
+          mostrarAlien(name);
+          std::cout<<"\n";
+          eleccion = input("Escribe 'y' o 'n': \n",eleccion);
+
+          if(eleccion == 'y'){
+            std::cout<<"Eliminando muestra de ADN";
+            for (int i = 0; i<3;i++){
+              delay(duracion_pausas);
+              std::cout<<".";
             }
-            else if(eleccion == 'n'){
-              std::cout<<"\nOperacion cancelada!\n\n";
-              return continuarSiNo();
+            dispositivo.eliminarAlienSplay(alien_hash.at(name));
+            dispositivo.borrarAlien(name);
+            alien_hash.erase(name);
 
-            }
-            else{
-              std::cout<<"Error! Opcion no valida.\n\n";
-            }
+
+            std::cout<<"\n\n\nMuestra eliminada exitosamente!\n";
+            return continuarSiNo();
+          }
+          else if(eleccion == 'n'){
+            std::cout<<"\nOperacion cancelada!\n\n";
+            return continuarSiNo();
 
           }
+          else{
+            std::cout<<"Error! Opcion no valida.\n\n";
           }
+
+        }
+
+          //Hasta aqui
         }
         numero_intentos -= 1;
 
@@ -376,10 +401,10 @@ private:
   }
   bool mostrarBaseNombre(){
     //Verificador de vacio incluido.
-    std::vector<Alien> a_d = dispositivo.getAliensUnlocked();
-    int numero_aliens = a_d.size();
+    std::unordered_map<std::string, Alien>& alien_hash =
+    dispositivo.getAliensHash();
 
-    if (numero_aliens == 0){
+    if (alien_hash.size()==0){
       for (int i = 0; i<3;i++){
         delay(duracion_pausas);
         std::cout<<".";
@@ -406,11 +431,9 @@ private:
           std::cout<<".";
         }
         std::cout<<"\n\n";
-        for (int i = 0; i < numero_aliens; i++){
-          if(name == a_d[i].getNombre()){
-            mostrarAlien(i);
-            return continuarSiNo();
-          }
+        if (alien_hash.count(name)>0){
+          mostrarAlien(name);
+          return continuarSiNo();
         }
         numero_intentos -= 1;
 
@@ -436,10 +459,12 @@ private:
 
   bool seleccionLibre(){
     //Verificador de vacio incluido.
-    std::vector<Alien> a_d = dispositivo.getAliensUnlocked();
-    int numero_aliens = a_d.size();
-
-    if (numero_aliens == 0){
+    //std::vector<Alien> a_d = dispositivo.getAliensUnlocked();
+    //int numero_aliens = a_d.size();
+    std::unordered_map<std::string, Alien>& alien_hash =
+    dispositivo.getAliensHash();
+    //std::cout<<alien_hash.at("Goku").getNombre();
+    if (alien_hash.size() == 0){
       for (int i = 0; i<3;i++){
         delay(duracion_pausas);
         std::cout<<".";
@@ -471,23 +496,23 @@ private:
           std::cout<<".";
         }
         std::cout<<"\n\n";
-        for (int i = 0; i < numero_aliens; i++){
-          if(name == a_d[i].getNombre()&&
-          name_actual != name){
 
-            name_actual = name;
-            seleccion_error = false;
-            numero_intentos = 5;
-            std::cout<<"Transformacion actual:\n\n";
-            //dispositivo.registrarUso(a_d[i].getNombre());
-            dispositivo.registrarEleccion(a_d[i].getNombre());
-            dispositivo.registrarEleccionSplay(a_d[i]);
-            mostrarAlien(i);
 
-            //return continuarSiNo();
-          }
+        if( (alien_hash.count(name)>0) && name_actual != name){
+
+          name_actual = name;
+          seleccion_error = false;
+          numero_intentos = 5;
+          std::cout<<"Transformacion actual:\n\n";
+          //dispositivo.registrarUso(a_d[i].getNombre());
+          dispositivo.registrarEleccion(alien_hash.at(name).getNombre());
+          dispositivo.registrarEleccionSplay(alien_hash.at(name));
+          mostrarAlien(name);
+
+          //return continuarSiNo();
         }
 
+        //Arriba
 
 
         if(numero_intentos <= 0){
@@ -583,7 +608,7 @@ private:
       //std::cout<<"Opcion3\n";
       break;
       default:
-      std::cout<<"Opcion4\n";
+      //std::cout<<"Opcion4\n";
       return false;
       break;
     }

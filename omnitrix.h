@@ -1,6 +1,7 @@
 #include "alien.h"
 #include "arbol.h"
 #include <vector>
+#include <unordered_map>
 //#include <queue>
 #ifndef OMNITRIX_H
 #define OMNITRIX_H
@@ -9,12 +10,14 @@ class Omnitrix {
 private:
     SplayTree& tree;
     std::vector<Alien>& aliens_unlocked;
+    std::unordered_map<std::string, Alien>& aliens_hash;
     //int num_aliens_unlocked;
     //std::queue<Alien> aliens_disp;
     //Creo que el uso del queue sera por fuera y demas.
 public:
-  Omnitrix(std::vector<Alien>& vector_aliens, SplayTree& splay)
-  :aliens_unlocked(vector_aliens),tree(splay){}
+  Omnitrix(std::vector<Alien>& vector_aliens, SplayTree& splay,
+  std::unordered_map<std::string, Alien>& aliens_dicc)
+  :aliens_unlocked(vector_aliens),tree(splay),aliens_hash(aliens_dicc){}
   void registrarVictoria(std::string nom){
     for(int i =0; i < aliens_unlocked.size();i++){
       if(aliens_unlocked[i].getNombre()==nom){
@@ -67,6 +70,9 @@ public:
   const std::vector<Alien>& getAliensUnlocked(){
     //const ya que quiero solo lectura para el mostrar
     return aliens_unlocked;
+  }
+  std::unordered_map<std::string,Alien>& getAliensHash(){
+    return aliens_hash;
   }
   /*const Alien getAlien(std::string){
     for (int i = 0; i < aliens_unlocked.size();i++){
