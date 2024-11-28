@@ -17,6 +17,10 @@ donde para usarse se sigue el siguiente comportamiento:
 Adicionalmente incluyo funciones para registrar nuevos aliens, eliminarlos, ver un alien en base al nombre y sus estadísticas, ver la lista de aliens completa o ver la lista con atributos incluso. 
 El orden de los aliens en las "listas" es en el que se hayan añadido, nunca modifico dicho vector para que así se sepa siempre en qué orden se añadieron.
 
+# Correcciones
+>En esta entrega no pude cambiar muchas cosas, lo único que hice fue implementar el Hash para las búsquedas por nombre que no modifican ningún atributo del alien, lo cuál acelera el programa.
+>He de mencionar que para ello tuve que modificar el .h de Omnitrix, de Main y de Menu principalmente, traté de volver a provocar el error obtenido durante la demostración pero me fue imposible.
+
 ## SICT0302B: Toma decisiones 
 
 ### Selecciona y usa una estructura lineal adecuada al problema
