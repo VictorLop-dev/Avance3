@@ -74,7 +74,7 @@ función de selección guiada (queue): Ya que están ordenados siempre será O(1
 
 función de mostrar alien por nombre (Hash) Esta funcion es donde realmente brilla el hash, pues al no tener que actualizar ningún dato, no hace falta utilizar también el SplayTree o el vector.
 
-funcion de selección libre (find SplayTree y Hash): Hash tiene O(n) pero en total es O(log(n)) ya que también se hace una especie de búsqueda binaria con el splayTree.
+funcion de selección libre (find SplayTree y Hash): Hash tiene O(1) en muy buenos casos pero en total es O(log(n)) ya que también se hace una especie de búsqueda binaria con el splayTree.
 
 función de añadir alien (insert SplayTree/ vector/Hash): También es O(log(n)) ya que técnicamente es como un find pero que añade al nuevo alien en la posición que debería estar y hasta atrás en el vector, aunque Hash lo haga con O(1), de nuevo las demás estructuras lo atrasan.
 
