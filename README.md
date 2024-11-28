@@ -7,6 +7,7 @@ donde para usarse se sigue el siguiente comportamiento:
 >Paso 1: Introducir el criterio de selección, puede ser fuerza, velocidad, resistencia, una combinación de estos o el total,
 >en caso de no ser válido se usará velocidad o resistencia por defecto (según sea modo de un criterio o dos).
 >Paso 2: Ver los aliens que van saliendo hasta que se desee.
+>
 >Ejemplo 2: Selección libre 
 >
 >Paso 1: Insertar el nombre del alien que quieres elegir (tienes intentos limitados que se reinician cuando eliges un alien no repetido y válido)
