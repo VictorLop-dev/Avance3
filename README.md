@@ -18,7 +18,7 @@ Adicionalmente incluyo funciones para registrar nuevos aliens, eliminarlos, ver 
 El orden de los aliens en las "listas" es en el que se hayan añadido, nunca modifico dicho vector para que así se sepa siempre en qué orden se añadieron.
 
 # Correcciones
->En esta entrega no pude cambiar muchas cosas, lo único que hice fue implementar el Hash para las búsquedas por nombre que no modifican ningún atributo del alien, lo cuál acelera el programa.
+>En esta entrega no pude cambiar muchas cosas, lo único que hice fue implementar el Hash para las búsquedas por nombre que no modifican ningún atributo del alien, lo cuál acelera el programa (La complejidad de busqueda por nombre pasó de O(n) al trabajar con vector a O(1) como mejor caso, aunque promedio y peor sigue en O(n).
 >He de mencionar que para ello tuve que modificar el .h de Omnitrix, de Main y de Menu principalmente, traté de volver a provocar el error obtenido durante la demostración pero me fue imposible.
 
 ## SICT0302B: Toma decisiones 
