@@ -51,11 +51,11 @@ en arbol.h líneas 189 y 554 respectivamente).
 
 ### Presenta Casos de Prueba correctos y completos para todas las funciones y procedimientos del programa,
 
-Honestamente, aún no he implementado casos de prueba, pero los que planeo son los siguientes:
+Los casos de prueba que yo segiero son los siguientes:
 
-Añadir y eliminar aliens y posteriormente mostrar la lista de aliens para ver si están todos los añadidos y si están en el orden que se fueron insertando.
+Añadir y eliminar aliens y posteriormente mostrar la lista de aliens para ver si están todos los añadidos y si están en el orden que se fueron insertando, posteriormente apagar y encender para probar el guardado.
 
-Probar los distintos ordenamientos haciendo ordenamiento con los 20 por defecto y luego con otro que añada yo.
+Probar los distintos ordenamientos haciendo ordenamiento con los 20 por defecto y luego con otro alien añadido por el usuario, para probar tanto insertionSort como mergeSort.
 
 Añadir alien, selección libre y eliminar ADN peligroso involucran al SplayTree, se puede hacer dichas operaciones y luego pedir la lista de aliens o usar el printTree.
 
@@ -63,13 +63,15 @@ El guardado se puede probar haciendo modificaciones al añadir aliens y/o elimin
 
 ### Hace un análisis de complejidad correcto y completo para todo el programa y sus componentes,
 
-#### Queue y Splay Tree de aliens
+#### Queue,  Splay Tree y Hash de aliens
 
-función de selección guiada (queue): Ya que están ordenados siempre será O(1) para obtener el siguiente alien ya que sólo estoy accediendo a la primera posición y eliminándola.
+función de selección guiada (queue): Ya que están ordenados siempre será O(1) para obtener el siguiente alien ya que sólo estoy accediendo a la primera posición y eliminándola, abajo se habla acerca del ordenamkiento, pero si los quisieramos juntar entonces sería O  (n(log(n))) cuando hay más de 20 aliens y O (n^2), aunque según algunas fuentes, cuando hay muy pocos elementos es muy común que el insertionSort sea tan bueno o en ocasiones hasta mejor que el mergeSort, así que la complejidad podría quedar simplemente como O (n(log(n)))
 
-funcion de selección libre (find SplayTree): Siempre es O(log(n)) ya que es una especie de búsqueda binaria.
+función de mostrar alien por nombre (Hash) Esta funcion es donde realmente brilla el hash, pues al no tener que actualizar ningún dato, no hace falta utilizar también el SplayTree o el vector.
 
-función de añadir alien (insert SplayTree/ vector): También es O(log(n)) ya que técnicamente es como un find pero que añade al nuevo alien en la posición que debería estar y hasta atrás en el vector.
+funcion de selección libre (find SplayTree y Hash): Hash tiene O(n) pero en total es O(log(n)) ya que también se hace una especie de búsqueda binaria con el splayTree.
+
+función de añadir alien (insert SplayTree/ vector/Hash): También es O(log(n)) ya que técnicamente es como un find pero que añade al nuevo alien en la posición que debería estar y hasta atrás en el vector, aunque Hash lo haga con O(1), de nuevo las demás estructuras lo atrasan.
 
 función de eliminar alien (delete SplayTree / vector): Si sólo fuera un SplayTree entonces  sería O(log(n)) pero como también debe trabajar con el vector, aumenta a O(n) por el peor de los casos de 
 este último ya que va comparando el nombre del alien guardado en cada posición del vector para saber si existe o no.
@@ -105,7 +107,8 @@ El programa permite obtener información acerca de todos los aliens o el que se 
 
 ### Implementa mecanismos de lectura de archivos correctos y útiles dentro de un programa. Usar de manera
 
-Los aliens así como su información, se encuentran almacenados en un archivo llamado "prueba.txt", también los nodos y sus conexiones.
+Los aliens así como su información, se encuentran almacenados en un archivo llamado "ADN.txt", también los nodos y sus conexiones.
 ### Implementa mecanismos de escritura de archivos correctos y útiles dentro de un programa. Usar de manera
 
-Los aliens se guardan al final de cada ejecución del programa para no tener que registrarlos todos cada vez que se vayan a usar.
+Los aliens se guardan al final de cada ejecución del programa para no tener que registrarlos todos cada vez que se vayan a usar y si se trata de iniciar el omnitrix 
+sin aliens entonces se insertan los 20 que están por defecto, para poder probar fácilmente el insertionSort y mergeSort.
